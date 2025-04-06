@@ -7,12 +7,9 @@
 
 import SwiftUI
 
+
 struct ActivityCard: View {
-    var activity: String
-    var icon: String
-    var goal: Int
-    var amount: Int
-    var color: Color
+   @State var activity: Activity
     var body: some View {
         ZStack{
             Color(uiColor: .systemGray6)
@@ -21,18 +18,18 @@ struct ActivityCard: View {
             VStack{
                 HStack(alignment: .top){
                     VStack(alignment: .leading){
-                        Text(activity)
+                        Text(activity.activityTitle)
                             .font(.headline)
-                        Text("Goal \(goal)")
+                        Text("Goal \(activity.goal)")
                             .font(.caption)
                     }
                     Spacer()
-                    Image(systemName: icon)
-                        .foregroundStyle(color)
+                    Image(systemName: activity.icon)
+                        .foregroundStyle(activity.color)
                 }
                 
                 
-                Text("\(amount)")
+                Text("\(activity.amount)")
                     .font(.title)
                     .bold()
                     .padding()
@@ -44,5 +41,5 @@ struct ActivityCard: View {
 }
 
 #Preview {
-    ActivityCard(activity: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue)
+    ActivityCard(activity: Activity(id:0,activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue))
 }
