@@ -9,10 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
 @State private var selectedTab = "Home"
-    init(){
+    init() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.stackedLayoutAppearance.selected.iconColor = .green
+        
+        // Apply green color to selected icon & text in all layouts
+        [appearance.stackedLayoutAppearance,
+         appearance.inlineLayoutAppearance,
+         appearance.compactInlineLayoutAppearance].forEach { layout in
+            layout.selected.iconColor = .green
+            layout.selected.titleTextAttributes = [.foregroundColor: UIColor.green]
+        }
+
+        UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     var body: some View {

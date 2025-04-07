@@ -21,7 +21,7 @@ struct HomeView: View {
                         VStack(alignment: .leading){
                             HomeHeaderView(key: "Calories", value: "\(vm.calories)", pcolor: .red)
                                 .padding(.bottom)
-                            HomeHeaderView(key: "Active", value: "\(vm.active) mins", pcolor: .green)
+                            HomeHeaderView(key: "Active", value: "\(vm.exercise) mins", pcolor: .green)
                                 .padding(.bottom)
                             HomeHeaderView(key: "Stand", value: "\(vm.stand) hr", pcolor: .blue)
                                 .padding(.bottom)
@@ -29,7 +29,7 @@ struct HomeView: View {
                         Spacer()
                         ZStack{
                             ProgressCirlceView(progress: $vm.calories, color: .red, goal: 600)
-                            ProgressCirlceView(progress: $vm.active, color: .green, goal:60 )
+                            ProgressCirlceView(progress: $vm.exercise, color: .green, goal:60 )
                                 .padding(.all,20)
                             ProgressCirlceView(progress: $vm.stand, color: .blue, goal: 200 )
                                 .padding(.all,40)
