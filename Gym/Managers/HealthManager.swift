@@ -30,8 +30,9 @@ class HealthManager{
         let calories = HKQuantityType(.activeEnergyBurned)
         let exercise = HKQuantityType(.appleExerciseTime)
         let stand = HKCategoryType(.appleStandHour)
+        let steps = HKQuantityType(.stepCount)
         
-        let healthTypes: Set = [calories,exercise,stand]
+        let healthTypes: Set = [calories,exercise,stand,steps]
         try await healthStore.requestAuthorization(toShare: [], read: healthTypes)
     }
     func fetchTodayCaloriesburned(completion: @escaping(Result<Double,Error>)-> Void){
@@ -75,6 +76,22 @@ class HealthManager{
             completion(.success(standCount))
         }
         
+        healthStore.execute(query)
+    }
+    // MARK: fitness Activity
+    func fetchTodayStep(completion: @escaping(Result<Activity,Error>)->Void){
+        let steps = HKQuantityType(.stepCount)
+        let predicate = HKQuery.predicateForSamples(withStart: .startOfDate, end: Date())
+        let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
+            guard let quantity = results?.sumQuantity(),error == nil else {
+                let error = NSError(domain: "com.yourapp.health", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch Number of Step"])
+                completion(.failure(error))
+                return
+            }
+            let steps = quantity.doubleValue(for: .count())
+            let activity = Activity(id: 0, activityTitle: "Todays Step", icon: "figure.walk", goal: 800, amount: Int(steps) , color: .green)
+            completion(.success(activity))
+        }
         healthStore.execute(query)
     }
 }
