@@ -16,6 +16,7 @@ class HomeViewModel: ObservableObject {
     @Published var calories : Int = 347
     @Published var exercise :Int  = 38
     @Published var stand :Int  = 21
+    @Published var activites = [Activity]()
     
     @Published  var mockActivities = [
         Activity(id: 0,activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
