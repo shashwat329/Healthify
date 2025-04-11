@@ -17,23 +17,23 @@ class HomeViewModel: ObservableObject {
     @Published var exercise :Int  = 38
     @Published var stand :Int  = 21
     @Published var activites = [Activity]()
+
+    @Published var workouts = [
+        Workout(id: 0, icon: "figure.run", iconColor: .green, workoutname: "Running", duration: "0", date: Date().FormatWorkoutDate(), calCount:299),
+        Workout(id: 1, icon: "figure.strengthtraining.traditional", iconColor: .blue, workoutname: "Workout", duration: "0", date: Date().FormatWorkoutDate(), calCount:299),
+        Workout(id: 2, icon: "figure.pool.swim", iconColor: .yellow, workoutname: "Swimming", duration: "0", date: Date().FormatWorkoutDate(), calCount:299),
+        Workout(id: 3, icon: "figure.archery", iconColor: .orange, workoutname: "Archery", duration: "0", date: Date().FormatWorkoutDate(), calCount:299)
+
+   
+    ]
     
-    @Published  var mockActivities = [
+     var mockActivities = [
         Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
         Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
         Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
         Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue)
    
     ]
-    @Published var mockWorkout = [
-        Workout(id: 0, icon: "figure.run", iconColor: .green, workoutname: "Running", duration: "27 mins", date: "32 Aug", calCount:299),
-        Workout(id: 1, icon: "figure.run", iconColor: .green, workoutname: "Running", duration: "27 mins", date: "32 Aug", calCount:299),
-        Workout(id: 2, icon: "figure.run", iconColor: .green, workoutname: "Running", duration: "27 mins", date: "32 Aug", calCount:299),
-        Workout(id: 3, icon: "figure.run", iconColor: .green, workoutname: "Running", duration: "27 mins", date: "32 Aug", calCount:299)
-       
-   
-    ]
-    
     init(){
        
         Task{
@@ -44,7 +44,7 @@ class HomeViewModel: ObservableObject {
                 fetchTodayStandHours()
                 fetchTodaysSteps()
                 fetchCurrentWeekActivities()
-                
+                fetchRecentWorkout()
             }
             catch{
                 print(error.localizedDescription)
@@ -58,7 +58,7 @@ class HomeViewModel: ObservableObject {
                 case .success(let calories):
                     DispatchQueue.main.async {
                         self.calories = Int((calories))
-                        let activity  = Activity( activityTitle: "calories burned", icon: "flame", goal: 3000, amount: Int(calories), color: .red)
+                        let activity  = Activity(id: 1,activityTitle: "calories burned", icon: "flame", goal: 3000, amount: Int(calories), color: .red)
                         self.activites.append(activity)
                     }
                 case .failure(let error):
@@ -117,4 +117,18 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    func fetchRecentWorkout(){
+        healthManager.fetchWorkoutsForMonth(month: Date()) { result in
+            switch result {
+                case .success(let workouts):
+                    DispatchQueue.main.async {
+                        self.workouts.append(contentsOf: workouts)
+                    }
+
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+
 }

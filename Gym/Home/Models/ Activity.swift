@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Activity{
+    var id: Int?
     var activityTitle: String
     var icon: String
     var goal: Int
