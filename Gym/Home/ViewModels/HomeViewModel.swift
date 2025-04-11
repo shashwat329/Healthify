@@ -19,10 +19,10 @@ class HomeViewModel: ObservableObject {
     @Published var activites = [Activity]()
     
     @Published  var mockActivities = [
-        Activity(id: 0,activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
-        Activity(id: 1,activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
-        Activity(id: 2,activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
-        Activity(id: 3,activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue)
+        Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
+        Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
+        Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue),
+        Activity(activityTitle: "Today's step", icon: "figure.walk", goal: 1000, amount: 1000, color: .blue)
    
     ]
     @Published var mockWorkout = [
@@ -42,6 +42,8 @@ class HomeViewModel: ObservableObject {
                 fetchTodayCalories()
                 fetchTodayExerciseTime()
                 fetchTodayStandHours()
+                fetchTodaysSteps()
+                fetchCurrentWeekActivities()
                 
             }
             catch{
@@ -56,6 +58,8 @@ class HomeViewModel: ObservableObject {
                 case .success(let calories):
                     DispatchQueue.main.async {
                         self.calories = Int((calories))
+                        let activity  = Activity( activityTitle: "calories burned", icon: "flame", goal: 3000, amount: Int(calories), color: .red)
+                        self.activites.append(activity)
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -82,6 +86,32 @@ class HomeViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.stand = hours
                     }
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+    // MARK: fitness Activity
+    func fetchTodaysSteps(){
+        healthManager.fetchTodayStep { result in
+            switch result {
+                case .success(let activity):
+                    DispatchQueue.main.async {
+                        self.activites.append(activity)
+                }
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchCurrentWeekActivities(){
+        healthManager.fetchCurrentWeekWorkoutStats { result in
+            switch result {
+                case .success(let activities):
+                    DispatchQueue.main.async {
+                        self.activites.append(contentsOf: activities)
+                }
                 case .failure(let error):
                     print(error.localizedDescription)
             }

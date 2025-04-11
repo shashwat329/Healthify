@@ -55,12 +55,14 @@ struct HomeView: View {
                         
                     }
                     .padding(.horizontal)
-                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                        ForEach(vm.mockActivities,id: \.id){activity in
-                            ActivityCard(activity: activity)
+                    if !vm.activites.isEmpty{
+                        LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
+                            ForEach(vm.activites,id: \.activityTitle){activity in
+                                ActivityCard(activity: activity)
+                            }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
                     HStack{
                         Text("Recent Workouts")
                             .font(.title2)
