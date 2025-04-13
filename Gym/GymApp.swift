@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct GymApp: App {
+    @AppStorage("isOnBoardingCompleted") var isOnBoardingCompleted: Bool = false
     var body: some Scene {
         WindowGroup {
+            if isOnBoardingCompleted{
                 ContentView()
+            }
+            else {
+                OnboardScreen()
+            }
         }
     }
 }
