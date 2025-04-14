@@ -24,14 +24,15 @@ struct TabViewComponent: View {
                         Image(systemName: "house")
                         Text("Home")
                     }
-                HistoricView()
-                    .tag("historic")
-                    .tabItem {
-                        Image(systemName: "chart.xyaxis.line")
-                        Text("Charts")
+                ChatBox()
+                    .tag("Chat")
+                    .tabItem{
+                        Image(systemName: "message.fill")
                     }
+                
             }
         }
+    
 }
 
 #Preview {

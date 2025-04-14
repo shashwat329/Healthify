@@ -256,7 +256,7 @@
 				DEVELOPMENT_TEAM = K2LS6S3ZTR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = myGym;
+				INFOPLIST_KEY_CFBundleDisplayName = Healthify;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all features of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -290,7 +290,7 @@
 				DEVELOPMENT_TEAM = K2LS6S3ZTR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = myGym;
+				INFOPLIST_KEY_CFBundleDisplayName = Healthify;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all features of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

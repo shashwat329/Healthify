@@ -55,6 +55,7 @@ class HomeViewModel: ObservableObject {
     func fetchTodayCalories(){
         healthManager.fetchTodayCaloriesburned{result in
             switch result {
+                    
                 case .success(let calories):
                     DispatchQueue.main.async {
                         self.calories = Int((calories))

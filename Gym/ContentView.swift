@@ -32,10 +32,10 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
-            HistoricView()
-                .tag("historic")
+            ChatBox()
+                .tag("message.fill")
                 .tabItem {
-                    Image(systemName: "chart.xyaxis.line")
+                    Image(systemName: "message.fill")
                     Text("Charts")
                 }
         }
