@@ -10,9 +10,11 @@ import Foundation
 
 struct dataManager{
     static func sourceofTruth(_ userInput: String, completion: @escaping (String?) -> Void) {
-        let apiKey = "AIzaSyAAA6hGpYM-tIq0Fj_ZoRlotMLjTXdjvxY"
+        guard let apiKey = Bundle.main.infoDictionary?["Api_Key"] as? String else {
+            print("API key not found")
+            return
+        }
         let urlString = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=\(apiKey)"
-
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             completion(nil)

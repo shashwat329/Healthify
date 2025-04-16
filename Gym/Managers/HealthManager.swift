@@ -21,7 +21,7 @@ extension Date{
     }
     func fetchMonthStartAndEndDate() -> (Date,Date) {
         let calendar = Calendar.current
-        var components = calendar.dateComponents([.year,.month], from: calendar.startOfDay(for: self))
+        let components = calendar.dateComponents([.year,.month], from: calendar.startOfDay(for: self))
         let startDate = calendar.date(from: components) ?? self
         let endDate = calendar.date(byAdding: DateComponents(month: 1,day: -1), to: startDate) ?? self
         return (startDate,endDate)

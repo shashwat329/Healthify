@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  Gym
+//
+//  Created by shashwat singh on 16/04/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_KEY=AIzaSyAAA6hGpYM-tIq0Fj_ZoRlotMLjTXdjvxY

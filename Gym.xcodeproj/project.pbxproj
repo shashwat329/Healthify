@@ -6,13 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6B47ECAB2DB001A4004DAB28 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6B4668312DA1018800AD6690 /* Gym.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gym.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6B47ECAD2DB00224004DAB28 /* Exceptions for "Gym" folder in "Gym" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6B4668302DA1018800AD6690 /* Gym */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6B4668332DA1018800AD6690 /* Gym */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6B47ECAD2DB00224004DAB28 /* Exceptions for "Gym" folder in "Gym" target */,
+			);
 			path = Gym;
 			sourceTree = "<group>";
 		};
@@ -32,6 +50,7 @@
 		6B4668282DA1018800AD6690 = {
 			isa = PBXGroup;
 			children = (
+				6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */,
 				6B4668332DA1018800AD6690 /* Gym */,
 				6B4668322DA1018800AD6690 /* Products */,
 			);
@@ -109,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B47ECAB2DB001A4004DAB28 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +147,7 @@
 /* Begin XCBuildConfiguration section */
 		6B46683D2DA1018900AD6690 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -190,6 +211,7 @@
 		};
 		6B46683E2DA1018900AD6690 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -246,6 +268,7 @@
 		};
 		6B4668402DA1018900AD6690 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -256,6 +279,7 @@
 				DEVELOPMENT_TEAM = K2LS6S3ZTR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gym/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Healthify;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all features of the app";
@@ -280,6 +304,7 @@
 		};
 		6B4668412DA1018900AD6690 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B47ECAA2DB001A4004DAB28 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,6 +315,7 @@
 				DEVELOPMENT_TEAM = K2LS6S3ZTR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gym/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Healthify;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all features of the app";
