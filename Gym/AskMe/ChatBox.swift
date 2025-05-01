@@ -15,7 +15,10 @@ struct Message: Identifiable {
 }
 struct ChatBox: View {
    
-    let welcomeMsg: String = "Welcome to Healthify"
+    let welcomeMsg: String = """
+    Welcome to Healthify.
+    How may I help you?
+    """
     @State private var userInput: String = ""
     @State private var messageHistory: [Message] = []
     @State private var responseFromGemini: String? = nil
@@ -23,20 +26,18 @@ struct ChatBox: View {
     @State private var loadingText: String = "Fetching response"
     @State private var dotCount: Int = 0
     
+    @FocusState private var isTextFieldFocused: Bool
+    
     var body: some View {
-        ZStack{
-            VStack(alignment: .leading){
-                Rectangle()
-                    .fill(Color.green)
-                    .frame(maxWidth: .infinity, maxHeight: 120)
-                ScrollView{
-                    CustomTextField(message: welcomeMsg,user: false)
-                    CustomTextField(message: "How may I help you",user: false)
-                    ForEach(messageHistory){ msg in
-                        CustomTextField(message: msg.text,user: msg.user)
+            VStack(alignment: .leading) {
+                ScrollView {
+                    CustomTextField(message: welcomeMsg, user: false)
+//                    CustomTextField(message: , user: false)
+                    
+                    ForEach(messageHistory) { msg in
+                        CustomTextField(message: msg.text, user: msg.user)
                     }
-                    
-                    
+
                     if isLoading {
                         Text("\(loadingText)\(String(repeating: ".", count: dotCount))")
                             .font(.body)
@@ -45,44 +46,50 @@ struct ChatBox: View {
                                 startDotAnimation()
                             }
                     }
-                        Spacer()
-                    }
-                    HStack{
-                        TextField("Enter your Query",text: $userInput,axis: .vertical)
-                            .keyboardType(.alphabet)
-                            .lineLimit(4)
-                            .onSubmit {
-                                if !(userInput.isEmpty){
-                                    let userMessage  = Message(text: userInput, user: true)
-                                    messageHistory.append(userMessage)
-                                    
-                                }
-                                isLoading = true
+
+                    Spacer()
+                }
+                .onTapGesture {
+                    isTextFieldFocused = false
+                }
+
+                HStack {
+                    TextField("Enter your Query", text: $userInput, axis: .vertical)
+                        .keyboardType(.alphabet)
+                        .lineLimit(4)
+                        .focused($isTextFieldFocused)
+                        .onSubmit {
+                            if !userInput.isEmpty {
+                                let userMessage = Message(text: userInput, user: true)
+                                messageHistory.append(userMessage)
                                 fetchResponse()
-                                userInput  = ""
+                                userInput = ""
+                                isTextFieldFocused = false
                             }
-                        
-                        Button {
-                            let userMessage  = Message(text: userInput, user: true)
+                        }
+
+                    Button {
+                        if !userInput.isEmpty {
+                            let userMessage = Message(text: userInput, user: true)
                             messageHistory.append(userMessage)
                             fetchResponse()
-                        } label: {
-                            Image(systemName: "paperplane.fill")
+                            userInput = ""
+                            isTextFieldFocused = false
                         }
+                    } label: {
+                        Image(systemName: "paperplane.fill")
+                            .foregroundStyle(Color.green)
                     }
-                    .font(.title2)
-                    .padding()
-                    .overlay{
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke()
-                    }
-                    
-                    .padding(20)
-                    
                 }
-         
-        }
-        .ignoresSafeArea(.all)
+                .font(.title2)
+                .padding(.vertical,9)
+                .padding(.horizontal)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(lineWidth: 1.5)
+                }
+                .padding(20)
+            }
         
     }
     func startDotAnimation() {
