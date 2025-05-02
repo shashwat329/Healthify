@@ -11,7 +11,7 @@ struct CustomTextField: View {
     let message:String
     let user: Bool
     var body: some View {
-        HStack(){
+        HStack(alignment: .top){
             if user{
                 Spacer()
                 
